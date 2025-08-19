@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/common.css" />
+    <link rel="stylesheet" href="./css/ui.css" />
+    <link rel="stylesheet" href="./css/main.css" />
+    <link rel="stylesheet" href="./css/swiper.min.css" />
+    <script defer src="./js/swiper-bundle.min.js"></script>
+    <!-- GSAP -->
+    <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollToPlugin.min.js"></script>
+    <script defer src="./js/main.js"></script>
+    <title>abc</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <h2>대메뉴</h2>
+            <ul id="gnb" class="mb_hd">
+                <li>
+                    <a href="#;">메뉴1</a>
+                    <ul class="depth">
+                        <li><a href="#;">서브메뉴 1</a></li>
+                        <li><a href="#;">서브메뉴 1</a></li>
+                        <li><a href="#;">서브메뉴 1</a></li>
+                        <li><a href="#;">서브메뉴 1</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#;">메뉴2</a>
+                    <ul class="depth">
+                        <li><a href="#;">서브메뉴 2</a></li>
+                        <li><a href="#;">서브메뉴 2</a></li>
+                        <li><a href="#;">서브메뉴 2</a></li>
+                        <li><a href="#;">서브메뉴 2</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#;">메뉴3</a>
+                    <ul class="depth">
+                        <li><a href="#;">서브메뉴 3</a></li>
+                        <li><a href="#;">서브메뉴 3</a></li>
+                        <li><a href="#;">서브메뉴 3</a></li>
+                        <li><a href="#;">서브메뉴 3</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#;">메뉴4</a>
+                    <ul class="depth">
+                        <li><a href="#;">서브메뉴 2</a></li>
+                        <li><a href="#;">서브메뉴 2</a></li>
+                        <li><a href="#;">서브메뉴 2</a></li>
+                        <li><a href="#;">서브메뉴 2</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="mo_bg"></div>
+        </nav>
+       
+        <span class="overlay"></span>
+    </header>
+    <main>
+        <!-- 메인 비주얼 -->
+        <section class="visual">
+            <div class="wrapper">
+                <h3>
+                    <p>Driven To Make A Better Tomorrow</p>
+                    <strong>Hanwha Energy</strong>
+                </h3>
+            </div>
+        </section>
+        <!-- 메인 vision -->
+        <!-- 메인 Business -->
+        <section class="business" data-bg="business01">
+            <div class="wrapper">
+                <div class="main_tit">
+                    <span class="tag">Business</span>
+                    <h3>
+                        <p>신재생에너지 사업을 기반으로 전 세계에</p>
+                        <p>안정적이고 경제적인 에너지 솔루션을 제공합니다.</p>
+                    </h3>
+                </div>
+                <div class="bu_slide_tab">
+                    <button type="button" class="active">신재생 에너지</button>
+                    <button type="button">집단 에너지</button>
+                    <button type="button">스마트팩토리&공정제어</button>
+                </div>
+                <div class="bu_slide_tab_con">
+                    <div class="con">
+                        <div class="bu_slide swiper">
+                            <div class="swiper-wrapper">
+                                <!-- 신재생 에너지 -->
+                                <div class="swiper-slide">
+                                    <div class="thumb"><img th:src="@{/resources/images/contents/thumb_bu_slide01.jpg}"
+                                            alt=""></div>
+                                    <div class="txt_box">
+                                        <div class="tit">
+                                            <span>신재생 에너지</span>
+                                            <strong>태양광 발전</strong>
+                                        </div>
+                                        <p>태양광 Full-Cycle 역량과 ESS 모델로 전 세계 주요 시장으로 확장하고 있습니다.</p>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="thumb"><img th:src="@{/resources/images/contents/thumb_bu_slide02.jpg}"
+                                            alt=""></div>
+                                    <div class="txt_box">
+                                        <div class="tit">
+                                            <span>신재생 에너지</span>
+                                            <strong>전력리테일</strong>
+                                        </div>
+                                        <p>태양광·열병합 역량으로 맞춤형 전력 공급과 에너지 전환을 이끌고 있습니다.</p>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="thumb"><img th:src="@{/resources/images/contents/thumb_bu_slide03.jpg}"
+                                            alt=""></div>
+                                    <div class="txt_box">
+                                        <div class="tit">
+                                            <span>신재생 에너지</span>
+                                            <strong>ESS</strong>
+                                        </div>
+                                        <p>다양한 전력 수요에 맞춘 최적의 설계·운영 역량으로 에너지 산업의 지속가능한 혁신을 이끕니다.</p>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="thumb"><img th:src="@{/resources/images/contents/thumb_bu_slide04.jpg}"
+                                            alt=""></div>
+                                    <div class="txt_box">
+                                        <div class="tit">
+                                            <span>신재생 에너지</span>
+                                            <strong>LNG발전</strong>
+                                        </div>
+                                        <p>한화에너지는 LNG 밸류체인 고도화와 발전 중심의 국내외 사업 확대를 추진합니다.</p>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="thumb"><img th:src="@{/resources/images/contents/thumb_bu_slide05.jpg}"
+                                            alt=""></div>
+                                    <div class="txt_box">
+                                        <div class="tit">
+                                            <span>신재생 에너지</span>
+                                            <strong>수소연료전지발전</strong>
+                                        </div>
+                                        <p>한화에너지는 부생수소 연료전지로 17만 가구 전력 공급, 친환경 발전을 실현합니다.</p>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="thumb"><img th:src="@{/resources/images/contents/thumb_bu_slide06.jpg}"
+                                            alt=""></div>
+                                    <div class="txt_box">
+                                        <div class="tit">
+                                            <span>신재생 에너지</span>
+                                            <strong>바이오매스 사업</strong>
+                                        </div>
+                                        <p>한화에너지는 산림 바이오매스를 활용해
+                                            탄소 저감과 산업 상생을 실현합니다.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slide_ctrl">
+                                <div class="swiper-scrollbar"></div>
+                                <div class="btn">
+                                    <div class="prev"></div>
+                                    <div class="next"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="con" style="display:none;">
+                        <div class="bu_slide swiper">
+                            <div class="swiper-wrapper">
+                                <!-- 집단 에너지 -->
+                                <div class="swiper-slide">
+                                    <div class="thumb"><img th:src="@{/resources/images/contents/thumb_bu_slide07.jpg}"
+                                            alt=""></div>
+                                    <div class="txt_box">
+                                        <div class="tit">
+                                            <span>집단 에너지</span>
+                                            <strong>열병합발전 사업</strong>
+                                        </div>
+                                        <p>고효율 열병합발전으로 산업단지에 에너지 효율 향상, 온실가스 저감, 비용 절감 효과를 제공합니다.</p>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="thumb"><img th:src="@{/resources/images/contents/thumb_bu_slide08.jpg}"
+                                            alt=""></div>
+                                    <div class="txt_box">
+                                        <div class="tit">
+                                            <span>집단 에너지</span>
+                                            <strong>구역 전기</strong>
+                                        </div>
+                                        <p>산업단지에 구역전기와 증기를 공급해 전력망 부담과 비용을 줄입니다.</p>
+                                    </div>
+                                </div>
+                                <!-- 스마트팩토리&공정제어 -->
+                                <div class="swiper-slide">
+                                    <div class="thumb"><img th:src="@{/resources/images/contents/thumb_bu_slide09.jpg}"
+                                            alt=""></div>
+                                    <div class="txt_box">
+                                        <div class="tit">
+                                            <span>스마트팩토리&공정제어</span>
+                                            <strong>스마트팩토리</strong>
+                                        </div>
+                                        <p>공정을 실시간 최적화해 고객사의 지속 성장과 경쟁력을 지원합니다.</p>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="thumb"><img th:src="@{/resources/images/contents/thumb_bu_slide10.jpg}"
+                                            alt=""></div>
+                                    <div class="txt_box">
+                                        <div class="tit">
+                                            <span>스마트팩토리&공정제어</span>
+                                            <strong>공장자동화</strong>
+                                        </div>
+                                        <p>정밀제어와 디지털 기술로 다양한 산업의 스마트 제조 환경을 구현합니다.</p>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="thumb"><img th:src="@{/resources/images/contents/thumb_bu_slide11.jpg}"
+                                            alt=""></div>
+                                    <div class="txt_box">
+                                        <div class="tit">
+                                            <span>스마트팩토리&공정제어</span>
+                                            <strong>그린에너지</strong>
+                                        </div>
+                                        <p>태양광·ESS 역량과 IT 기술로 글로벌 태양광 시장에 최적의 O&M 서비스를 제공합니다.</p>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="thumb"><img th:src="@{/resources/images/contents/thumb_bu_slide01.jpg}"
+                                            alt=""></div>
+                                    <div class="txt_box">
+                                        <div class="tit">
+                                            <span>신재생 에너지</span>
+                                            <strong>태양광 발전</strong>
+                                        </div>
+                                        <p>태양광 Full-Cycle 역량과 ESS 모델로 전 세계 주요 시장으로 확장하고 있습니다.</p>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="thumb"><img th:src="@{/resources/images/contents/thumb_bu_slide02.jpg}"
+                                            alt=""></div>
+                                    <div class="txt_box">
+                                        <div class="tit">
+                                            <span>신재생 에너지</span>
+                                            <strong>전력리테일</strong>
+                                        </div>
+                                        <p>태양광·열병합 역량으로 맞춤형 전력 공급과 에너지 전환을 이끌고 있습니다.</p>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="thumb"><img th:src="@{/resources/images/contents/thumb_bu_slide03.jpg}"
+                                            alt=""></div>
+                                    <div class="txt_box">
+                                        <div class="tit">
+                                            <span>신재생 에너지</span>
+                                            <strong>ESS</strong>
+                                        </div>
+                                        <p>다양한 전력 수요에 맞춘 최적의 설계·운영 역량으로 에너지 산업의 지속가능한 혁신을 이끕니다.</p>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="thumb"><img th:src="@{/resources/images/contents/thumb_bu_slide04.jpg}"
+                                            alt=""></div>
+                                    <div class="txt_box">
+                                        <div class="tit">
+                                            <span>신재생 에너지</span>
+                                            <strong>LNG발전</strong>
+                                        </div>
+                                        <p>한화에너지는 LNG 밸류체인 고도화와 발전 중심의 국내외 사업 확대를 추진합니다.</p>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="thumb"><img th:src="@{/resources/images/contents/thumb_bu_slide05.jpg}"
+                                            alt=""></div>
+                                    <div class="txt_box">
+                                        <div class="tit">
+                                            <span>신재생 에너지</span>
+                                            <strong>수소연료전지발전</strong>
+                                        </div>
+                                        <p>한화에너지는 부생수소 연료전지로 17만 가구 전력 공급, 친환경 발전을 실현합니다.</p>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="thumb"><img th:src="@{/resources/images/contents/thumb_bu_slide06.jpg}"
+                                            alt=""></div>
+                                    <div class="txt_box">
+                                        <div class="tit">
+                                            <span>신재생 에너지</span>
+                                            <strong>바이오매스 사업</strong>
+                                        </div>
+                                        <p>한화에너지는 산림 바이오매스를 활용해
+                                            탄소 저감과 산업 상생을 실현합니다.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slide_ctrl">
+                                <div class="swiper-scrollbar"></div>
+                                <div class="btn">
+                                    <div class="prev"></div>
+                                    <div class="next"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="con" style="display:none;">
+                        <div class="bu_slide swiper">
+                            <div class="swiper-wrapper">
+                                <!-- 스마트팩토리&공정제어 -->
+                                <div class="swiper-slide">
+                                    <div class="thumb"><img th:src="@{/resources/images/contents/thumb_bu_slide09.jpg}"
+                                            alt=""></div>
+                                    <div class="txt_box">
+                                        <div class="tit">
+                                            <span>스마트팩토리&공정제어</span>
+                                            <strong>스마트팩토리</strong>
+                                        </div>
+                                        <p>공정을 실시간 최적화해 고객사의 지속 성장과 경쟁력을 지원합니다.</p>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="thumb"><img th:src="@{/resources/images/contents/thumb_bu_slide10.jpg}"
+                                            alt=""></div>
+                                    <div class="txt_box">
+                                        <div class="tit">
+                                            <span>스마트팩토리&공정제어</span>
+                                            <strong>공장자동화</strong>
+                                        </div>
+                                        <p>정밀제어와 디지털 기술로 다양한 산업의 스마트 제조 환경을 구현합니다.</p>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="thumb"><img th:src="@{/resources/images/contents/thumb_bu_slide11.jpg}"
+                                            alt=""></div>
+                                    <div class="txt_box">
+                                        <div class="tit">
+                                            <span>스마트팩토리&공정제어</span>
+                                            <strong>그린에너지</strong>
+                                        </div>
+                                        <p>태양광·ESS 역량과 IT 기술로 글로벌 태양광 시장에 최적의 O&M 서비스를 제공합니다.</p>
+                                    </div>
+                                </div>
+                                <!-- 신재생 에너지 -->
+                                <div class="swiper-slide">
+                                    <div class="thumb"><img th:src="@{/resources/images/contents/thumb_bu_slide01.jpg}"
+                                            alt=""></div>
+                                    <div class="txt_box">
+                                        <div class="tit">
+                                            <span>신재생 에너지</span>
+                                            <strong>태양광 발전</strong>
+                                        </div>
+                                        <p>태양광 Full-Cycle 역량과 ESS 모델로 전 세계 주요 시장으로 확장하고 있습니다.</p>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="thumb"><img th:src="@{/resources/images/contents/thumb_bu_slide02.jpg}"
+                                            alt=""></div>
+                                    <div class="txt_box">
+                                        <div class="tit">
+                                            <span>신재생 에너지</span>
+                                            <strong>전력리테일</strong>
+                                        </div>
+                                        <p>태양광·열병합 역량으로 맞춤형 전력 공급과 에너지 전환을 이끌고 있습니다.</p>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="thumb"><img th:src="@{/resources/images/contents/thumb_bu_slide03.jpg}"
+                                            alt=""></div>
+                                    <div class="txt_box">
+                                        <div class="tit">
+                                            <span>신재생 에너지</span>
+                                            <strong>ESS</strong>
+                                        </div>
+                                        <p>다양한 전력 수요에 맞춘 최적의 설계·운영 역량으로 에너지 산업의 지속가능한 혁신을 이끕니다.</p>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="thumb"><img th:src="@{/resources/images/contents/thumb_bu_slide04.jpg}"
+                                            alt=""></div>
+                                    <div class="txt_box">
+                                        <div class="tit">
+                                            <span>신재생 에너지</span>
+                                            <strong>LNG발전</strong>
+                                        </div>
+                                        <p>한화에너지는 LNG 밸류체인 고도화와 발전 중심의 국내외 사업 확대를 추진합니다.</p>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="thumb"><img th:src="@{/resources/images/contents/thumb_bu_slide05.jpg}"
+                                            alt=""></div>
+                                    <div class="txt_box">
+                                        <div class="tit">
+                                            <span>신재생 에너지</span>
+                                            <strong>수소연료전지발전</strong>
+                                        </div>
+                                        <p>한화에너지는 부생수소 연료전지로 17만 가구 전력 공급, 친환경 발전을 실현합니다.</p>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="thumb"><img th:src="@{/resources/images/contents/thumb_bu_slide06.jpg}"
+                                            alt=""></div>
+                                    <div class="txt_box">
+                                        <div class="tit">
+                                            <span>신재생 에너지</span>
+                                            <strong>바이오매스 사업</strong>
+                                        </div>
+                                        <p>한화에너지는 산림 바이오매스를 활용해
+                                            탄소 저감과 산업 상생을 실현합니다.</p>
+                                    </div>
+                                </div>
+                                <!-- 집단 에너지 -->
+                                <div class="swiper-slide">
+                                    <div class="thumb"><img th:src="@{/resources/images/contents/thumb_bu_slide07.jpg}"
+                                            alt=""></div>
+                                    <div class="txt_box">
+                                        <div class="tit">
+                                            <span>집단 에너지</span>
+                                            <strong>열병합발전 사업</strong>
+                                        </div>
+                                        <p>고효율 열병합발전으로 산업단지에 에너지 효율 향상, 온실가스 저감, 비용 절감 효과를 제공합니다.</p>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="thumb"><img th:src="@{/resources/images/contents/thumb_bu_slide08.jpg}"
+                                            alt=""></div>
+                                    <div class="txt_box">
+                                        <div class="tit">
+                                            <span>집단 에너지</span>
+                                            <strong>구역 전기</strong>
+                                        </div>
+                                        <p>산업단지에 구역전기와 증기를 공급해 전력망 부담과 비용을 줄입니다.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slide_ctrl">
+                                <div class="swiper-scrollbar"></div>
+                                <div class="btn">
+                                    <div class="prev"></div>
+                                    <div class="next"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- 메인 global -->
+        <section class="global">
+            <div class="wrapper">
+                <div class="main_tit">
+                    <span class="tag">Global</span>
+                    <h3>
+                        <p>글로벌 네트워크</p>
+                    </h3>
+                    <p class="sub_tit">글로벌 시장을 무대로 에너지 솔루션을 선도하는 지속가능한 기업으로 도약하고 잇습니다.</p>
+                </div>
+                <!-- 네트워크 상세화면 이동 -->
+                <a href="#;" class="circle_txt">Hanwha Energy Driven to make a better tomorrow</a>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

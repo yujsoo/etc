@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>checkbox</h1>
+    <div class="checkbox_list">
+        <label id="all_check" class="checkobx">
+            <input type="checkbox" />
+            <i></i>
+            <span>전체동의</span>
+        </label>
+        <label class="sub_check checkobx">
+            <input type="checkbox" />
+            <i></i>
+            <span>A</span>
+        </label>
+        <label class="sub_check checkobx">
+            <input type="checkbox" />
+            <i></i>
+            <span>B</span>
+        </label>
+        <label class="sub_check checkobx">
+            <input type="checkbox" />
+            <i></i>
+            <span>c</span>
+        </label>
+        <label class="sub_check checkobx">
+            <input type="checkbox" />
+            <i></i>
+            <span>D</span>
+        </label>
+    </div>
+    <!-- js -->
+    <script>
+        const allCheck = document.querySelector('#all_check input');
+        const subChecks = document.querySelectorAll('.sub_check input')
+    
+        // 전체 동의 클릭시 하위 항목 전체 체크/해제
+        allCheck.addEventListener('change',() => {
+            subChecks.forEach((checkbox) => {
+                checkbox.checked = allCheck.checked;
+            });
+        });
+
+        // 하위 체크 풀릴시
+        subChecks.forEach((checkbox) => {
+            checkbox.addEventListener('change', () => {
+                const allChecked = Array.from(subChecks).every(cb => cb.checked);
+                console.log(allChecked) // 하나라도 false => false
+                
+                allCheck.checked = allChecked;
+            })
+        })
+    </script>
+</body>
+</html>

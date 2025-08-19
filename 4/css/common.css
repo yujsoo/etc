@@ -1,0 +1,602 @@
+@charset "utf-8";
+
+.wrapper {
+    width: var(--wrapper-size);
+    margin: 0 auto;
+}
+
+/*-------------------------------------------------------------------
+   ## Header
+-------------------------------------------------------------------*/
+header {
+    position: fixed;
+    z-index: 99;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 10rem;
+    padding-left: var(--spacing_content);
+    padding-right: var(--spacing_content);
+    background-color: transparent;
+    transition:background-color .3s ease;
+}
+
+header.active {
+    border-bottom: 1px solid var(--c_lightgray);
+}
+
+header .wrapper {
+    display: flex;
+    position: relative;
+    width: var(--wrapper-l-size);
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+header h1 {
+    display: block;
+    position: absolute;
+    z-index: 1;
+    top: 3rem;
+    left: .6rem;
+    width: 22.8rem;
+    height: 4rem;
+    background-image: url(../images/ic/ic_logo.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    text-indent: -999.9rem;
+}
+
+header h1 a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+header h1 img {
+    width: 100%;
+}
+
+header nav {
+    display: flex;
+}
+
+header nav h2 {
+    display: none;
+    position: absolute;
+    z-index: 99;
+    top: 3rem;
+    right: 0;
+    text-indent: -99.9rem;
+    width: 4rem;
+    height: 4rem;
+    cursor: pointer;
+    background-color: red;
+}
+
+header nav h2 span {
+    display: block;
+    position: relative;
+    top: -1rem;
+    width: 2.4rem;
+    height: .2rem;
+    margin-left: .8rem;
+    margin-bottom: .5rem;
+    background: var(--c_white);
+    border-radius: 3px;
+    transition: transform .35s cubic-bezier(.77, .2, .05, 1),
+        opacity .25s ease,
+        background .25s ease;
+    transform-origin: center;
+}
+
+header nav h2.active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+header nav h2.active span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(.5);
+}
+
+header nav h2.active span:nth-child(3) {
+    transform: translateY(-.7rem) rotate(-45deg);
+}
+
+header #gnb {
+    display: flex;
+    gap: 0 7.2rem;
+    transition: all .3s ease;
+}
+
+header #gnb a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+header #gnb>li {
+    position: relative;
+}
+
+header #gnb>li>a {
+    position: relative;
+    height: 100%;
+    padding: 3.7rem 0;
+    color: var(--c_white);
+    line-height: 1.6;
+    transition: color .2s ease;
+}
+
+header #gnb>li>a:hover {
+    color: var(--c_primary);
+}
+
+header #gnb>li>a:after {
+    content: '';
+    position: absolute;
+    bottom: -.1rem;
+    left: 50%;
+    width: 0;
+    height: .3rem;
+    opacity: 0;
+    transform: translateX(-50%);
+    background: var(--c_primary);
+    transition: all .3s ease;
+}
+
+header #gnb>li:hover>a:after {
+    width: 100%;
+    opacity: 1;
+}
+
+header #gnb .depth {
+    display:none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    padding-top: 3.2rem;
+    min-width: 13.2rem;
+    text-align: center;
+    transform: translateX(-50%);
+}
+
+header #gnb .depth>li>a {
+    padding: .8rem 0;
+    font-weight: 300;
+    line-height: 1.6;
+}
+
+header #gnb .depth>li>a span {
+    display: inline-block;
+    position: relative;
+    height: 100%;
+}
+
+header #gnb .depth>li>a span:after {
+    content: '';
+    position: absolute;
+    bottom: -.1rem;
+    left: 50%;
+    width: 0;
+    height: .1rem;
+    opacity: 0;
+    transform: translateX(-50%);
+    background: var(--c_black);
+    transition: all .3s ease;
+}
+
+header #gnb .depth>li>a:hover span:after {
+    width: 100%;
+    opacity: 1;
+}
+
+
+header .lang {
+    display: flex;
+    position: absolute;
+    top: 3.2rem;
+    right: 17.1rem;
+    white-space: nowrap;
+}
+
+header .lang a {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: .5rem 1.2rem;
+    color: var(--c_white_60);
+    line-height: 1.5;
+    transition: color .3s ease;
+}
+
+header .lang a:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: .1rem;
+    height: 1.2rem;
+    margin-top: -.7rem;
+    background: rgba(255, 255, 255, .36);
+}
+
+header .lang a:last-child:after {
+    display: none;
+}
+
+header .lang *:hover,
+header .lang .active {
+    color: var(--c_white);
+}
+
+
+header .convergence_btn {
+    display: flex;
+    position: absolute;
+    top: 3.2rem;
+    right: .6rem;
+    color: var(--c_white);
+    font-size: var(--fz_s);
+    padding: .5rem .5rem .5rem 1.3rem;
+    border: .1rem solid var(--c_white_20);
+    border-radius: 2rem;
+    align-items: center;
+}
+
+header .convergence_btn span {
+    position: relative;
+    top: .1rem;
+}
+
+header .convergence_btn:after {
+    content: '';
+    width: 2.2rem;
+    height: 2.2rem;
+    margin-left: .8rem;
+    border-radius: 50%;
+    background-image: url(../images/ic/ic_util_arw.svg);
+    background-color: var(--c_black_60);
+    background-position: center;
+    background-size: 8px;
+    background-repeat: no-repeat;
+}
+
+header .overlay {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height:0;
+    background-color: var(--c_white);
+    border-top: 1px solid transparent;
+    visibility: hidden;
+    transition: all .3s ease;
+}
+
+/* header mouseover시 효과 */
+header.active {
+    background-color: var(--c_white);
+}
+
+header.active h1 {
+    background-image: url(../images/ic/ic_logo_b.svg);
+}
+
+header.active #gnb>li>a {
+    color: var(--c_black);
+}
+
+header.active #gnb .depth {
+    display:block;
+}
+
+header.active .overlay {
+    border-color: var(--c_lightgray);
+        height: 36.8rem;
+    visibility: visible;
+}
+
+header.active .lang a {
+    color: var(--c_gray2);
+}
+
+header.active .lang a:after {
+    background: #E8E8E8;
+}
+
+header.active .lang *:hover,
+header.active .lang .active {
+    color: var(--c_black);
+}
+
+header.active .convergence_btn {
+    color: var(--c_black);
+    border-color: var(--c_lightgray)
+}
+
+header #gnb.pc_active {
+    gap: 0 12rem;
+}
+
+
+/*-------------------------------------------------------------------
+   ## Footer
+-------------------------------------------------------------------*/
+footer {
+    background: var(--c_white);
+}
+
+footer .wrapper {
+    width: var(--wrapper-l-size);
+}
+
+footer .top .wrapper {
+    display: flex;
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+footer .btm .wrapper {
+    display: flex;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    justify-content: space-between;
+    align-items: center;
+    border-top: .1rem solid var(--c_lightgray2);
+    font-size: var(--fz_s);
+}
+
+footer .global_menu {
+    display: flex;
+    gap: 0 8rem;
+}
+
+footer .global_menu li>strong {
+    display: block;
+    margin-bottom: 2rem;
+    color: var(--c_gray);
+    font-size: 2rem;
+    line-height: 1;
+}
+
+footer .global_menu li p a {
+    display: block;
+    line-height: 1;
+    padding: 1rem 0;
+    color: var(--c_gray2);
+    font-weight: 300;
+}
+
+footer .familysite_select {
+    position: relative;
+    width: 28rem;
+    height: 4.8rem;
+    border: .1rem solid var(--c_lightgray2);
+    border-radius: .6rem;
+}
+
+footer .familysite_select>button {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 4.8rem;
+    padding-left: 2rem;
+    padding-right: 6rem;
+    font-weight: 300;
+    text-align: left;
+    transition: all .3s ease;
+}
+
+footer .familysite_select>button:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 1.8rem;
+    width: 1.1rem;
+    height: 1.1rem;
+    margin-top: -0.55rem;
+    background-image: url(../images/ic/ic_select_arw_up.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+footer .familysite_select .menus:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 1.8rem;
+    width: calc(100% - 3.6rem);
+    height: .1rem;
+    background: var(--c_lightgray2);
+}
+
+footer .familysite_select .menus {
+    display: none;
+    position: absolute;
+    left: -.1rem;
+    bottom: 100%;
+    width: calc(100% + .2rem);
+    padding: 4rem 1.8rem 3.2rem;
+    border: .1rem solid var(--c_lightgray2);
+    border-radius: var(--round_m) var(--round_m) 0 0;
+    border-bottom: 0;
+    background: var(--c_white);
+}
+
+footer .familysite_select .menus dl {
+    position: relative;
+    flex: 1;
+    margin-right: 3.4rem;
+    padding-right: 3.4rem;
+    border-right: .1rem solid var(--c_lightgray2);
+}
+
+footer .familysite_select .menus dl:last-child {
+    margin-right: 0;
+    padding-right: 0;
+    border-right: 0;
+}
+
+footer .familysite_select .menus dt {
+    margin-bottom: 2rem;
+    font-size: var(--fz_m);
+    line-height: 1.6;
+}
+
+footer .familysite_select .menus dd a {
+    display: block;
+    padding: .8rem 0;
+    color: var(--c_gray);
+    line-height: 1;
+    transition: color .3s ease;
+}
+
+footer .familysite_select .menus dd a:hover {
+    color: var(--c_primary);
+}
+
+/* 패밀리사이트 active */
+footer .familysite_select.active {
+    width: 77.8rem;
+    border-radius: 0 0 .6rem .6rem;
+    border-top: 0;
+}
+
+footer .familysite_select.active button:after {
+    transform: rotate(180deg)
+}
+
+footer .copy {
+    color: var(--c_gray3);
+    line-height: 1;
+}
+
+footer .etc_link {
+    display: flex;
+}
+
+footer .etc_link a {
+    display: block;
+    position: relative;
+    padding: 1rem 1.2rem;
+    color: var(--c_gray);
+    line-height: 1;
+}
+
+footer .etc_link a:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: .1rem;
+    height: 1.2rem;
+    margin-top: -.7rem;
+    background: var(--c_lightgray2);
+}
+
+footer .etc_link a:last-child {
+    padding-right: 0;
+}
+
+footer .etc_link a:last-child:after {
+    display: none;
+}
+
+/*-------------------------------------------------------------------
+   ## Container
+-------------------------------------------------------------------*/
+
+.btm_fix_btn {
+    position: fixed;
+    z-index: 99;
+    bottom: 6rem;
+    right: 6rem;
+    width: 6rem;
+    height: 6rem;
+    border-radius: var(--round_base);
+    background-color: var(--c_black_30);
+    text-indent: -999.9rem;
+    backdrop-filter: blur(.3rem);
+    background-image: url(../images/ic/ic_arw_top.svg);
+    background-position: center;
+    background-size: 1.8rem;
+    background-repeat: no-repeat;
+    transition: background-color .3s ease;
+}
+
+.btm_fix_btn:hover {
+    background-color: var(--c_primary);
+}
+
+.mo_bg {
+    position:fixed;
+    top:0;
+    right:-100%;
+    width:100%;
+    height:100vh;
+    background:rgba(255,255,255,.9);
+    transition:all .3s ease;
+}
+
+@media all and (max-width: 1440px) {
+    header {
+        padding-left: 3.6rem;
+        padding-right: 3.6rem;
+    }
+
+    header #gnb {
+        gap: 0 5.2rem;
+    }
+}
+
+@media all and (max-width: 1279px) {}
+
+@media all and (max-width: 1024px) {
+    .mb_hd {
+        display: none !important;
+    }
+
+    header {
+        padding-left: var(--spacing_content);
+        padding-right: var(--spacing_content);
+    }
+
+    header nav h2 {
+        display: block;
+    }
+
+    header.mo_active .mo_bg {
+        right:0;
+    }
+
+    header .overlay {
+        display:none;
+    }
+
+                header #gnb .depth {
+            display:block;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .3s ease;
+        }
+    
+                header #gnb li.open>.depth {
+            /* max-height는 JS에서 설정 */
+        }
+}
+
+@media all and (max-width: 768px) {}
+
+@media all and (max-width: 480px) {}
+
+@media all and (max-width: 375px) {}

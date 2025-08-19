@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>GSAP Scroll Mask + Text Invert</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            overflow: auto;
+            font-family: system-ui, -apple-system, "Roboto", sans-serif;
+            color: #fff;
+            background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/314556/dachshund.jpg") center center / cover no-repeat fixed;
+        }
+
+        .spacer {
+            height: 120vh;
+            display: grid;
+            place-items: center;
+            font-size: 3rem;
+            opacity: .6;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, .35);
+        }
+
+        .reveal {
+            position: relative;
+            height: 100vh;
+            /* pin 영역 */
+            overflow: hidden;
+        }
+
+        #demo {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        /* 텍스트 공통 스타일 */
+        .txt {
+            font-weight: 800;
+            letter-spacing: .02em;
+        }
+
+        .title {
+            font-size: clamp(28px, 6vw, 80px);
+        }
+
+        .subtitle {
+            font-size: clamp(16px, 2.4vw, 28px);
+            font-weight: 600;
+            opacity: .9;
+        }
+
+        /* 클릭 막힘 방지 (레이어 위에서도 드래그/스크롤 가능) */
+        #demo * {
+            pointer-events: none;
+        }
+
+        .title-wrap {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    z-index: 10;
+    color: white;
+    mix-blend-mode: difference; /* 검정/흰색 반전 효과 */
+  }
+
+  .title-wrap h1 {
+    font-size: clamp(28px, 6vw, 80px);
+    margin: 0;
+  }
+
+  .title-wrap p {
+    font-size: clamp(16px, 2vw, 28px);
+    margin: 0.5em 0 0;
+  }
+
+  .reveal {
+    position: relative;
+    height: 100vh;
+  }
+    </style>
+</head>
+
+<body>
+    <section class="spacer">위 컨텐츠</section>
+
+    <section class="reveal">
+
+<div class="title-wrap">
+  <h1>반전되는 타이틀</h1>
+  <p>원 안/밖 색 반전 자동 적용</p>
+</div>
+
+        <svg id="demo" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+            <defs>
+                <!-- 1) 원 형태(타원) 정의: 마스크들에서 <use>로 재사용 -->
+                <ellipse id="coverShape" cx="50%" cy="50%" rx="0" ry="0"></ellipse>
+
+                <!-- 2) 바깥(Outside) 마스크: 바깥은 보이게(흰), 원 안은 가리게(검정) -->
+                <mask id="maskOutside" maskUnits="userSpaceOnUse">
+                    <rect x="0" y="0" width="100%" height="100%" fill="#fff" />
+                    <use href="#coverShape" fill="#000" />
+                </mask>
+
+                <!-- 3) 안쪽(Inside) 마스크: 원 안은 보이게(흰), 바깥은 가리게(검정) -->
+                <mask id="maskInside" maskUnits="userSpaceOnUse">
+                    <rect x="0" y="0" width="100%" height="100%" fill="#000" />
+                    <use href="#coverShape" fill="#fff" />
+                </mask>
+            </defs>
+
+            <!-- 흰색 오버레이(바깥 영역): 원이 커질수록 안쪽이 뚫려 배경이 보임 -->
+            <g mask="url(#maskOutside)">
+                <rect id="overlay" x="0" y="0" width="100%" height="100%" fill="#fff" />
+            </g>
+
+           t>
+            </g>
+        </svg>
+    </section>
+
+    <section class="spacer">아래 컨텐츠</section>
+
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // ===== 파라미터 =====
+        const MID_RATIO = 0.15;   // 시작(중간) 크기 비율
+        const OPEN_RATIO = 1.00;   // 최대 크기 스케일
+        const TILT_DEG = -42;    // 타원 기울기(원하는 각도)
+        // 가로/세로 비(ry/rx): 살짝 찌그러진 타원 느낌
+        const RY_OVER_RX = 0.25 / 0.35;
+        const OPEN_MARGIN = 1.02;   // 살짝 여유(2%) 줘서 완전 오픈 보장
+
+        let rxOpen = 0, ryOpen = 0;
+        let rxMid = 0, ryMid = 0;
+
+        // 회전된 타원이 화면 사각형 네 꼭짓점을 모두 포함하도록 하는 최소 rx 계산
+        function requiredRxForFullCover(w, h, thetaRad, r /*=ry/rx*/) {
+            const corners = [
+                [w / 2, h / 2],
+                [-w / 2, h / 2],
+                [w / 2, -h / 2],
+                [-w / 2, -h / 2],
+            ];
+            const ct = Math.cos(thetaRad), st = Math.sin(thetaRad);
+            let reqA = 0;
+            for (const [x, y] of corners) {
+                const xp = x * ct + y * st;
+                const yp = -x * st + y * ct;
+                const needA = Math.sqrt(xp * xp + (yp * yp) / (r * r));
+                if (needA > reqA) reqA = needA;
+            }
+            return reqA;
+        }
+
+        function figureMask() {
+            const w = window.innerWidth;
+            const h = window.innerHeight;
+            const cx = w / 2;
+            const cy = h / 2;
+
+            const theta = TILT_DEG * Math.PI / 180;
+            const r = RY_OVER_RX;
+
+            // 완전 오픈 보장 rx(=a)
+            const a = requiredRxForFullCover(w, h, theta, r) * OPEN_MARGIN * OPEN_RATIO;
+
+            rxOpen = a;
+            ryOpen = r * a;
+
+            rxMid = rxOpen * MID_RATIO;
+            ryMid = ryOpen * MID_RATIO;
+
+            // 중심/회전/초기 크기 세팅 (defs의 원본 엘리먼트를 수정하면 모든 <use>에 반영)
+            const shape = document.getElementById("coverShape");
+            shape.setAttribute("cx", cx);
+            shape.setAttribute("cy", cy);
+            shape.setAttribute("transform", `rotate(${TILT_DEG} ${cx} ${cy})`);
+
+            gsap.set("#coverShape", { attr: { rx: rxMid, ry: ryMid } });
+        }
+
+        // 초기 계산
+        figureMask();
+
+        // 스크롤에 따라 타원 rx/ry → 최대치로 확대
+        gsap.to("#coverShape", {
+            attr: { rx: () => rxOpen, ry: () => ryOpen },
+            ease: "none",
+            scrollTrigger: {
+                trigger: ".reveal",
+                start: "top top",
+                end: "+=200%",   // 커지는 구간 길이(속도 느낌) — 필요시 조절
+                scrub: true,
+                pin: true,
+                anticipatePin: 1
+            }
+        });
+
+        // 리사이즈 대응
+        window.addEventListener("resize", () => {
+            figureMask();
+            ScrollTrigger.refresh();
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+.text-cut-scroll-wrap {
+    position: relative;
+    height: 100vh;
+}
+
+.text-cut-scroll-wrap .img {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+}
+
+.text-cut-scroll-wrap .text_box {
+    position: absolute;
+    right:0;
+    bottom:0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    text-align: right;
+}
+
+.text-cut-scroll-wrap .text_box p {
+    color:#fff;
+    opacity: 0;
+    transform: translateY(8px);
+}
+
+.text-cut-scroll-wrap .img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.text-cut-scroll-wrap .cutout {
+    width: 100%;
+    height: 100%;
+    display: block;
+    will-change: transform;
+    transform: none !important;
+}
+
+svg,
+#mask-text,
+#logo {
+    shape-rendering: geometricPrecision;
+    text-rendering: geometricPrecision;
+}
+

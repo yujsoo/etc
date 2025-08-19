@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>탭-그룹 연동 Swiper 데모</title>
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <style>
+        :root {
+            --bg: #0f1b24;
+            --glass: rgba(255, 255, 255, .06);
+            --accent: #00bcd4;
+            --text: #fff;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            color: var(--text);
+            background: linear-gradient(180deg, #0a1421 0%, #152736 100%);
+            font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", "Apple SD Gothic Neo", "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        }
+
+        .wrap {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 40px 20px 80px
+        }
+
+        h1 {
+            font-size: 28px;
+            margin: 0 0 8px
+        }
+
+        p.lead {
+            opacity: .8;
+            margin: 0 0 24px
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px
+        }
+
+        .tab {
+            padding: 10px 16px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, .3);
+            background: rgba(255, 255, 255, .08);
+            color: var(--text);
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform .12s ease, background-color .2s ease, border-color .2s ease;
+        }
+
+        .tab:hover {
+            transform: translateY(-1px)
+        }
+
+        .tab.is-active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #071217
+        }
+
+        .tab[aria-selected="false"] {
+            opacity: .8
+        }
+
+        /* Swiper */
+        .business-swiper {
+            overflow: hidden;
+            touch-action: pan-y;
+        }
+
+        .swiper-button-prev,
+        .swiper-button-next {
+            --swiper-navigation-size: 22px;
+            color: #fff;
+            background: rgba(0, 0, 0, .35);
+            width: 40px;
+            height: 40px;
+            border-radius: 999px;
+            backdrop-filter: blur(6px);
+        }
+
+        .swiper-button-prev:after,
+        .swiper-button-next:after {
+            font-size: 18px;
+            font-weight: 800
+        }
+
+        .swiper-scrollbar {
+            background: rgba(255, 255, 255, .12)
+        }
+
+        .swiper-scrollbar-drag {
+            background: #fff
+        }
+
+        /* Card slide */
+        .swiper-slide.card {
+            height: 260px;
+            border-radius: 14px;
+            overflow: hidden;
+            background: var(--glass);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, .25);
+            position: relative;
+        }
+
+        .card .thumb {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            filter: saturate(1) contrast(1.05) brightness(.95);
+            transform: scale(1.02);
+        }
+
+        .card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0, 0, 0, .0) 45%, rgba(0, 0, 0, .55) 100%);
+        }
+
+        .card .meta {
+            position: absolute;
+            left: 12px;
+            right: 12px;
+            bottom: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .badge {
+            align-self: flex-start;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: .02em;
+            padding: 4px 8px;
+            border-radius: 999px;
+            background: rgba(0, 0, 0, .55);
+            border: 1px solid rgba(255, 255, 255, .18)
+        }
+
+        .title {
+            font-size: 18px;
+            font-weight: 800;
+            line-height: 1.25;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, .55)
+        }
+
+        .desc {
+            font-size: 13px;
+            opacity: .9
+        }
+
+        @media (min-width:768px) {
+            .swiper-slide.card {
+                height: 300px
+            }
+        }
+
+        @media (min-width:1024px) {
+            .swiper-slide.card {
+                height: 320px
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .tab,
+            .swiper * {
+                transition: none !important;
+                animation: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <h1>Business</h1>
+        <p class="lead">신재생에너지 사업을 기반으로 탭과 슬라이드를 그룹으로 연동한 예시입니다.</p>
+
+        <!-- Tabs -->
+        <div class="tabs" role="tablist" aria-label="Business 카테고리">
+            <button class="tab is-active" role="tab" aria-selected="true" data-tab="0">태양광</button>
+            <button class="tab" role="tab" aria-selected="false" data-tab="1">전력인프라</button>
+            <button class="tab" role="tab" aria-selected="false" data-tab="2">ESS</button>
+            <button class="tab" role="tab" aria-selected="false" data-tab="3">LNG</button>
+            <button class="tab" role="tab" aria-selected="false" data-tab="4">수소·연료전지</button>
+        </div>
+
+        <!-- Swiper -->
+        <div class="swiper business-swiper">
+            <div class="swiper-wrapper">
+                <!-- 그룹 0 (예: 1~4번째) -->
+                <div class="swiper-slide card" data-group="0">
+                    <div class="thumb" style="background-image:url(https://picsum.photos/seed/pv1/800/520)"></div>
+                    <div class="meta"><span class="badge">그룹 0</span>
+                        <div class="title">태양광 발전 #1</div>
+                        <div class="desc">안정적이고 경제적인 에너지</div>
+                    </div>
+                </div>
+                <div class="swiper-slide card" data-group="0">
+                    <div class="thumb" style="background-image:url(https://picsum.photos/seed/pv2/800/520)"></div>
+                    <div class="meta"><span class="badge">그룹 0</span>
+                        <div class="title">태양광 발전 #2</div>
+                        <div class="desc">운영 효율 향상 솔루션</div>
+                    </div>
+                </div>
+                <div class="swiper-slide card" data-group="0">
+                    <div class="thumb" style="background-image:url(https://picsum.photos/seed/pv3/800/520)"></div>
+                    <div class="meta"><span class="badge">그룹 0</span>
+                        <div class="title">태양광 발전 #3</div>
+                        <div class="desc">스마트 유지보수</div>
+                    </div>
+                </div>
+                <div class="swiper-slide card" data-group="0">
+                    <div class="thumb" style="background-image:url(https://picsum.photos/seed/pv4/800/520)"></div>
+                    <div class="meta"><span class="badge">그룹 0</span>
+                        <div class="title">태양광 발전 #4</div>
+                        <div class="desc">글로벌 프로젝트</div>
+                    </div>
+                </div>
+
+                <!-- 그룹 1 -->
+                <div class="swiper-slide card" data-group="1">
+                    <div class="thumb" style="background-image:url(https://picsum.photos/seed/grid1/800/520)"></div>
+                    <div class="meta"><span class="badge">그룹 1</span>
+                        <div class="title">전력 인프라 #1</div>
+                        <div class="desc">송배전 최적화</div>
+                    </div>
+                </div>
+                <div class="swiper-slide card" data-group="1">
+                    <div class="thumb" style="background-image:url(https://picsum.photos/seed/grid2/800/520)"></div>
+                    <div class="meta"><span class="badge">그룹 1</span>
+                        <div class="title">전력 인프라 #2</div>
+                        <div class="desc">안정성 강화</div>
+                    </div>
+                </div>
+                <div class="swiper-slide card" data-group="1">
+                    <div class="thumb" style="background-image:url(https://picsum.photos/seed/grid3/800/520)"></div>
+                    <div class="meta"><span class="badge">그룹 1</span>
+                        <div class="title">전력 인프라 #3</div>
+                        <div class="desc">스마트 그리드</div>
+                    </div>
+                </div>
+                <div class="swiper-slide card" data-group="1">
+                    <div class="thumb" style="background-image:url(https://picsum.photos/seed/grid4/800/520)"></div>
+                    <div class="meta"><span class="badge">그룹 1</span>
+                        <div class="title">전력 인프라 #4</div>
+                        <div class="desc">고효율 설비</div>
+                    </div>
+                </div>
+
+                <!-- 그룹 2 -->
+                <div class="swiper-slide card" data-group="2">
+                    <div class="thumb" style="background-image:url(https://picsum.photos/seed/ess1/800/520)"></div>
+                    <div class="meta"><span class="badge">그룹 2</span>
+                        <div class="title">ESS #1</div>
+                        <div class="desc">안전한 저장</div>
+                    </div>
+                </div>
+                <div class="swiper-slide card" data-group="2">
+                    <div class="thumb" style="background-image:url(https://picsum.photos/seed/ess2/800/520)"></div>
+                    <div class="meta"><span class="badge">그룹 2</span>
+                        <div class="title">ESS #2</div>
+                        <div class="desc">수명 최적화</div>
+                    </div>
+                </div>
+
+                <!-- 그룹 3 -->
+                <div class="swiper-slide card" data-group="3">
+                    <div class="thumb" style="background-image:url(https://picsum.photos/seed/lng1/800/520)"></div>
+                    <div class="meta"><span class="badge">그룹 3</span>
+                        <div class="title">LNG #1</div>
+                        <div class="desc">친환경 연료</div>
+                    </div>
+                </div>
+                <div class="swiper-slide card" data-group="3">
+                    <div class="thumb" style="background-image:url(https://picsum.photos/seed/lng2/800/520)"></div>
+                    <div class="meta"><span class="badge">그룹 3</span>
+                        <div class="title">LNG #2</div>
+                        <div class="desc">공급망 관리</div>
+                    </div>
+                </div>
+
+                <!-- 그룹 4 -->
+                <div class="swiper-slide card" data-group="4">
+                    <div class="thumb" style="background-image:url(https://picsum.photos/seed/h2_1/800/520)"></div>
+                    <div class="meta"><span class="badge">그룹 4</span>
+                        <div class="title">수소·연료전지 #1</div>
+                        <div class="desc">그린 수소</div>
+                    </div>
+                </div>
+                <div class="swiper-slide card" data-group="4">
+                    <div class="thumb" style="background-image:url(https://picsum.photos/seed/h2_2/800/520)"></div>
+                    <div class="meta"><span class="badge">그룹 4</span>
+                        <div class="title">수소·연료전지 #2</div>
+                        <div class="desc">발전 효율</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-scrollbar"></div>
+        </div>
+    </div>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script>
+        // 탭 버튼 목록
+        const tabs = Array.from(document.querySelectorAll('.tabs [data-tab]'));
+
+        // 원본 슬라이드(중복 제외) - 그룹/인덱스 계산용
+        const originalSlides = Array.from(
+            document.querySelectorAll('.business-swiper .swiper-wrapper > .swiper-slide:not(.swiper-slide-duplicate)')
+        );
+
+        // 그룹별 "첫 슬라이드 realIndex" 계산
+        const groupStartIndex = (() => {
+            const map = new Map(); // group -> first real index
+            originalSlides.forEach((el, idx) => {
+                const g = Number(el.dataset.group ?? -1);
+                if (!map.has(g)) map.set(g, idx);
+            });
+            return tabs.map((_btn, i) => map.get(i) ?? 0);
+        })();
+
+        // Swiper 생성
+        const swiper = new Swiper('.business-swiper', {
+            slidesPerView: 1.15,
+            spaceBetween: 16,
+            loop: true,
+            speed: 500,
+            navigation: {
+                nextEl: '.business-swiper .swiper-button-next',
+                prevEl: '.business-swiper .swiper-button-prev',
+            },
+            scrollbar: { el: '.business-swiper .swiper-scrollbar', draggable: true },
+            breakpoints: {
+                640: { slidesPerView: 1.4 },
+                768: { slidesPerView: 2.2 },
+                1024: { slidesPerView: 3.2 },
+                1280: { slidesPerView: 4.2 },
+            },
+            on: {
+                init() {
+                    setActiveTab(getGroupByRealIndex(this.realIndex));
+                },
+                slideChange() {
+                    setActiveTab(getGroupByRealIndex(this.realIndex));
+                },
+            },
+        });
+
+        // realIndex(원본 기준) → group 번호
+        function getGroupByRealIndex(realIdx) {
+            const slideEl = originalSlides[realIdx];
+            return Number(slideEl?.dataset.group ?? 0);
+        }
+
+        // 탭 활성화 표시 + ARIA 갱신
+        function setActiveTab(group) {
+            tabs.forEach((btn, i) => {
+                const active = i === group;
+                btn.classList.toggle('is-active', active);
+                btn.setAttribute('aria-selected', String(active));
+                btn.tabIndex = active ? 0 : -1;
+            });
+        }
+
+        // loop 환경에서 realIndex로 안전 이동 (slideToLoop 미지원 버전 대비)
+        function goToRealIndexLoopSafe(swiper, realIndex, speed = 500) {
+            if (typeof swiper.slideToLoop === 'function') {
+                swiper.slideToLoop(realIndex, speed);
+                return;
+            }
+            // 대안: data-swiper-slide-index 로 루프 인덱스 찾기
+            const loopIndex = Array.from(swiper.slides).findIndex(
+                s => Number(s.getAttribute('data-swiper-slide-index')) === realIndex
+            );
+            swiper.slideTo(loopIndex >= 0 ? loopIndex : realIndex, speed);
+        }
+
+        // 탭 클릭 → 해당 그룹의 첫 슬라이드로 이동
+        tabs.forEach((btn, i) => {
+            btn.addEventListener('click', () => {
+                const targetRealIndex = groupStartIndex[i] ?? 0;
+                goToRealIndexLoopSafe(swiper, targetRealIndex, 500);
+            });
+            // 키보드 접근성(←/→로 탭 이동)
+            btn.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    const dir = e.key === 'ArrowRight' ? 1 : -1;
+                    const next = (i + dir + tabs.length) % tabs.length;
+                    tabs[next].focus();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

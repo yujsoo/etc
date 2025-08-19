@@ -1,0 +1,134 @@
+@charset "utf-8";
+
+/*-------------------------------------------------------------------
+  파일정의 : UI
+  작성날짜 : 2025-08-14 유지수
+  분류순서 : 기본정책 > 유틸리티 > 사용자정의(컬러, 폰트, 보더, 간격 등)
+  속성순서 : 표시 > 위치 > 넘침/흐름 > 크기/간격 > 박스모양 > 폰트/정렬 > 기타
+-------------------------------------------------------------------*/
+:root {
+    --wrapper-size: 1200px;
+    --wrapper-l-size: 1920px;
+
+    /* 공통 font */
+    --font-hanwha: 'Hanwha';
+
+    /* 공통 색상 */
+    --c_white: #fff;
+    --c_white_20: rgba(255, 255, 255, .2);
+    --c_white_40: rgba(255, 255, 255, .4);
+    --c_white_60: rgba(255, 255, 255, .6);
+    --c_white_70: rgba(255, 255, 255, .7);
+    --c_black: #222;
+    --c_black_30: rgba(34, 34, 34, .3);
+    --c_black_60: rgba(34, 34, 34, .6);
+    --c_gray: #444;
+    --c_gray_70: rgba(68, 68, 68, .7);
+    --c_gray2: #666;
+    --c_gray3: #999;
+    --c_lightgray: #ddd;
+    --c_lightgray2: #E8E8E8;
+    --c_primary: #F37321;
+
+    /* 공통 title font size */
+    --title_fz_xxl: 10rem;
+    --title_fz_xl: 6.4rem;
+    --title_fz_l: 4.8rem;
+    --title_fz_m: 3.2rem;
+    --title_fz_s: 2.4rem;
+    --title_fz_xs: 2rem;
+
+    /* 공통 body font size */
+    --fz_base: 1.6rem;
+    --fz_s: 1.4rem;
+    --fz_m: 1.8rem;
+    --fz_l: 2rem;
+    --fz_xl: 2.4rem;
+
+    /* 공통 round */
+    --round_base: 0.6rem;
+    --round_s: 0.4rem;
+    --round_m: 0.8rem;
+    --round_max: 999rem;
+
+    /* 공통 spacing */
+    --spacing_content: 6rem;
+}
+
+/*==================================================================
+  ## etc
+==================================================================*/
+.f_hanwha {
+    font-family: 'hanwha', sans-serif !important;
+}
+
+.p_0 {
+    padding: 0 !important;
+}
+
+.mr_auto {
+    margin-right: auto !important;
+}
+
+.ml_auto {
+    margin-left: auto !important;
+}
+
+.m_0 {
+    margin: 0 !important;
+}
+
+.tal {
+    text-align: left !important;
+}
+
+.tar {
+    text-align: right !important;
+}
+
+.tac {
+    text-align: center !important;
+}
+
+.sr_only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+
+@media all and (max-width: 1920px) {
+    :root {
+        --wrapper-l-size: 100%;
+    }
+}
+
+@media all and (max-width: 1279px) {
+    html {
+        font-size: 9px;
+    }
+}
+
+@media all and (max-width: 1199px) {
+    :root {
+        --wrapper-size: 100%;
+    }
+}
+
+@media all and (max-width: 1024px) {
+    :root {
+        --spacing_content: 2rem;
+    }
+}
+
+@media all and (max-width: 768px) {}
+
+@media all and (max-width: 480px) {}
+
+@media all and (max-width: 375px) {}
